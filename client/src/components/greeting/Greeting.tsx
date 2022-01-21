@@ -32,9 +32,8 @@ function Greeting() {
       <h1>Hello, {user?.username ? user.username : "user"}!</h1>
 
       <h4>
-        This is a PINC Data analysis website.....................
-        aklsjdlkajsldlasjdlajlskdjklasjldkasjdjasdjlasljdlaksjdklajskldjal sjdklajsdljasldjalsjd
-        lajldjkalksjdlakjsdlkjas dja lsdjlas jdlkajsl djalsdjlakjsd lajlsd jaklsj daljs
+        This is a PINC Data analysis website. This site was created for the purpose of analyzing the
+        data of pinc students.
       </h4>
 
       <button className="greeting_button" onClick={handleStatisticsButton}>

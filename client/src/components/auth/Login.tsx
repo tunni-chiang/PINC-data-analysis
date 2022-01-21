@@ -18,7 +18,7 @@ function Login({ switch_auth_cb, error_msg_cb, close_modal_cb }: any) {
     try {
       const body = { username, password };
 
-      let response = await axios.post("/users/authenticate", body, {
+      let response = await axios.post("http://localhost:3001/users/authenticate", body, {
         headers: {
           "x-access-token": cookies.user,
         },

@@ -13,13 +13,20 @@ const users = require("./routes/users");
 const stats = require("./routes/stats");
 
 // only allow api access to certain domains
-app.use(cors({ origin: ["http://localhost:3000"], credentials: true }));
+// app.use(cors({ origin: ["*"], credentials: true }));
+app.use(cors());
 
 // use middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(server.routes);
+
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  next();
+});
 
 app.use("/users", users);
 app.use("/stats", stats);

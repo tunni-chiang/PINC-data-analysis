@@ -20,7 +20,7 @@ function Register({ switch_auth_cb, error_msg_cb, close_modal_cb }: any) {
     try {
       const body = { username, password, token };
 
-      let response = await axios.post("/users/create", body);
+      let response = await axios.post("http://localhost:3001/users/create", body);
       let status: any = response.data;
 
       if (!status.success) {

@@ -46,7 +46,7 @@ function Nav({ light }: any) {
 
   const checkAuth = async () => {
     try {
-      let response = await axios.get("/users/read", {
+      let response = await axios.get("http://localhost:3001/users/read", {
         headers: {
           "x-access-token": cookies.user,
         },

@@ -33,7 +33,7 @@ function StatsPanel({ selected_demographic }: any) {
 
   const getData = async () => {
     try {
-      let response = await axios.get("/stats/read", {
+      let response = await axios.get("http://localhost:3001/stats/read", {
         headers: {
           "x-access-token": cookies.user,
         },
