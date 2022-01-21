@@ -1,0 +1,101 @@
+.adminpanel_container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+.admin_info {
+  margin-left: 10px;
+  margin-top: 10px;
+  height: 100%;
+  width: 40%;
+}
+.token_container {
+  border-top: solid 1.5px rgb(121, 121, 121);
+  margin-top: 10%;
+}
+.token_info {
+  display: flex;
+  margin-top: 30px;
+  height: 50px;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(241, 241, 241);
+  border: solid 1px rgba(151, 151, 151, 0.671);
+  border-radius: 5px;
+}
+.token_copy {
+  color: rgb(109, 109, 109);
+  cursor: pointer;
+  transition: all 0.1s 0s ease;
+}
+
+.token_copy:hover {
+  color: #e65050;
+}
+
+.token_copy:active {
+  color: #b42828;
+}
+
+.token_text {
+  margin-right: 7px;
+}
+
+.token_desc {
+  color: rgb(68, 68, 68);
+  font-size: 14px;
+}
+.token_description {
+  display: block;
+}
+
+.stats_add {
+  border-top: solid 1.5px rgb(121, 121, 121);
+  margin-top: 10%;
+}
+
+.select_file {
+  margin-top: 30px;
+  height: 200px;
+  background-color: #eb96966c;
+  border: dashed 3.5px #721b1b6c;
+  transition: all 0.1s 0s ease;
+  cursor: pointer;
+}
+
+.select_file:hover {
+  background-color: #eb9696a1;
+}
+
+.normal_button {
+  border: none;
+  font-family: "Montserrat", sans-serif;
+  font-weight: bold;
+  border-radius: 4px;
+  color: white;
+  width: 100px;
+  padding: 10px;
+  margin-top: 10px;
+  cursor: pointer;
+
+  margin-left: 10px;
+  background-color: #e65050;
+}
+
+.disabled_btn {
+  background-color: #999999 !important;
+  cursor: default;
+}
+
+.normal_button:hover {
+  background-color: #d13a3a;
+}
+
+.normal_button:active {
+  background-color: #b42828;
+}
+
+.stats_butons {
+  display: flex;
+  justify-content: flex-end;
+}

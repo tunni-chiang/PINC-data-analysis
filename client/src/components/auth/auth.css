@@ -1,0 +1,89 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Poppins:wght@300;400;600&display=swap");
+.container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  /* height: 42vh; */
+}
+
+.auth_container {
+  display: block;
+  text-align: center;
+  margin-top: 5%;
+  width: 350px;
+  /* height: 170px; */
+  height: 90%;
+}
+
+.auth_container input,
+.switch_auth {
+  /* margin: 0 auto; */
+  /* display: block; */
+}
+.auth_container input {
+  /* font-family: "Montserrat", sans-serif; */
+  font-family: "Poppins", sans-serif;
+  padding: 5px;
+  border: 1px solid grey;
+  color: rgb(102, 102, 102);
+  font-size: 13px;
+  height: 25px;
+  border-radius: 3px;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.switch_auth {
+  color: #1a73e8;
+  display: block;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+.auth_form {
+  display: flex;
+  justify-content: center;
+  /* text-align: left; */
+}
+.auth_form form {
+  text-align: left;
+  width: 80%;
+}
+.auth_button {
+  border: none;
+  font-family: "Montserrat", sans-serif;
+  font-weight: bold;
+  border-radius: 4px;
+  color: white;
+  /* width: 85px; */
+  width: 100%;
+
+  padding: 10px;
+  margin-top: 30px;
+  cursor: pointer;
+  transition: ease all 0.2s;
+  background-color: #2b2b2b;
+}
+
+.auth_button:hover {
+  background-color: #f0425c;
+}
+
+.auth_button:active {
+  background-color: #b81b32;
+}
+
+.auth_title {
+  color: rgb(66, 66, 66);
+  /* font-family: "Poppins", sans-serif; */
+
+  font-size: 20px;
+  margin-bottom: 30px;
+}
+.auth_buttons {
+  text-align: center;
+}
+.auth_label_text {
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+}
