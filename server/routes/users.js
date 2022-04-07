@@ -16,12 +16,14 @@ router.post("/create", async (req, res) => {
 
 router.get("/read", Auth.validate, async (req, res) => {
   const result = await UserModel.read(req.userId);
-
   res.status(result.code).json(result);
 });
 
 router.post("/update", Auth.validate, async (req, res) => {
-  const allowedChanges = ["email", "password"];
+  // const allowedChanges = ["email", "password"];
+
+  // depends on auth
+  const allowedChanges = ["wallet", "password"];
   const changes = req.body;
   const result = await UserModel.update(req.userId, changes, allowedChanges);
 

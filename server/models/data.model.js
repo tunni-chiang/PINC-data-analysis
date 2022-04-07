@@ -15,6 +15,7 @@ DataModel.read = async () => {
     if (!result || result.length === 0) throw new Error("Database Error");
     status = States.status200(result, "Successfully gathered data", 200);
   } catch (error) {
+    console.log(error);
     status = States.status400("Connection Error", 200);
   }
 

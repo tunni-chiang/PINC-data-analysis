@@ -18,11 +18,15 @@ function Login({ switch_auth_cb, error_msg_cb, close_modal_cb }: any) {
     try {
       const body = { username, password };
 
-      let response = await axios.post("http://localhost:3001/users/authenticate", body, {
-        headers: {
-          "x-access-token": cookies.user,
-        },
-      });
+      let response = await axios.post(
+        "http://ec2-54-153-118-245.us-west-1.compute.amazonaws.com:3005/users/authenticate",
+        body,
+        {
+          headers: {
+            "x-access-token": cookies.user,
+          },
+        }
+      );
       let status: any = response.data;
       console.log(JSON.stringify(status));
       if (status.success === false) {

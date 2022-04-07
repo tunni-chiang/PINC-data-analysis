@@ -33,11 +33,17 @@ function StatsPanel({ selected_demographic }: any) {
 
   const getData = async () => {
     try {
-      let response = await axios.get("http://localhost:3001/stats/read", {
-        headers: {
-          "x-access-token": cookies.user,
-        },
-      });
+      let response = await axios.get(
+        "http://ec2-54-153-118-245.us-west-1.compute.amazonaws.com:3005/stats/read",
+        {
+          headers: {
+            "x-access-token": cookies.user,
+          },
+        }
+      );
+      console.log(response);
+      console.log(response);
+      console.log(response);
 
       let status: any = response.data;
       if (status.success) {
