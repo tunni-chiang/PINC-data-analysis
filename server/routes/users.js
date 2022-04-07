@@ -20,10 +20,8 @@ router.get("/read", Auth.validate, async (req, res) => {
 });
 
 router.post("/update", Auth.validate, async (req, res) => {
-  // const allowedChanges = ["email", "password"];
-
   // depends on auth
-  const allowedChanges = ["wallet", "password"];
+  const allowedChanges = ["email", "password"];
   const changes = req.body;
   const result = await UserModel.update(req.userId, changes, allowedChanges);
 
