@@ -6,7 +6,7 @@ import AdminPanel from "../../components/user/AdminPanel";
 import Nav from "../../components/nav/Nav";
 import { useCookies } from "react-cookie";
 import { useSelector, useDispatch } from "react-redux";
-import { userLogout, userLogin, selectUser, selectIsLoggedIn } from "../../store/slices/userSlice";
+import { userLogout, selectUser } from "../../store/slices/userSlice";
 import { useNavigate } from "react-router-dom";
 import RingLoader from "react-spinners/RingLoader";
 import { sleep } from "../../helper/sleep";
