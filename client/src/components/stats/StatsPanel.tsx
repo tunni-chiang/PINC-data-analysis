@@ -18,7 +18,7 @@ function StatsPanel({ selected_demographic }: any) {
   // const isLoggedIn = useSelector(selectIsLoggedIn);
 
   const saveCanvas = () => {
-    //save to png
+    // save to png
     // const canvasSave = currentGraph.
     if (!currentGraph == null) {
       return;
@@ -33,14 +33,11 @@ function StatsPanel({ selected_demographic }: any) {
 
   const getData = async () => {
     try {
-      let response = await axios.get(
-        "http://ec2-54-153-118-245.us-west-1.compute.amazonaws.com:3005/stats/read",
-        {
-          headers: {
-            "x-access-token": cookies.user,
-          },
-        }
-      );
+      let response = await axios.get(process.env.REACT_APP_BACKEND_IP + "/stats/read", {
+        headers: {
+          "x-access-token": cookies.user,
+        },
+      });
       console.log(response);
       console.log(response);
       console.log(response);
@@ -83,12 +80,18 @@ function StatsPanel({ selected_demographic }: any) {
           class_name="CSC 698 | 699"
           image_src="asd"
         />
+        <ClassInfo
+          courses={["CSC220", "CSC219", "CSC210", "CSC306", "CSC307", "CSC308", "CSC699", "CSC698"]}
+          select_cb={setSelectedCourses}
+          class_name="Pinc Courses | All"
+          image_src="asd"
+        />
       </div>
 
       <div className="stats_data_vis">
         <div className="stats_download_zone">
           <p className="stats_download_desc">
-            Download data visualization for {selectedCourses.join(" and ")}
+            Download data visualization for {selectedCourses.join("/")}
           </p>
           <button className="download_button" onClick={() => saveCanvas()}>
             Download

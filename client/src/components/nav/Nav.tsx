@@ -46,14 +46,11 @@ function Nav({ light }: any) {
 
   const checkAuth = async () => {
     try {
-      let response = await axios.get(
-        "http://ec2-54-153-118-245.us-west-1.compute.amazonaws.com:3005/users/read",
-        {
-          headers: {
-            "x-access-token": cookies.user,
-          },
-        }
-      );
+      let response = await axios.get(process.env.REACT_APP_BACKEND_IP + "/users/read", {
+        headers: {
+          "x-access-token": cookies.user,
+        },
+      });
 
       let status: any = response.data;
       if (status.success) {

@@ -20,10 +20,7 @@ function Register({ switch_auth_cb, error_msg_cb, close_modal_cb }: any) {
     try {
       const body = { username, password, token };
 
-      let response = await axios.post(
-        "http://ec2-54-153-118-245.us-west-1.compute.amazonaws.com:3005/users/create",
-        body
-      );
+      let response = await axios.post(process.env.REACT_APP_BACKEND_IP + "/users/create", body);
       let status: any = response.data;
 
       if (!status.success) {
