@@ -49,10 +49,10 @@ function Dashboard() {
         <div className="dashboard_container">
           <div className="dashboard_header" style={{ backgroundImage: `url(${mountain})` }}>
             <Nav light={false} />
-            <img className="dashboard_pfp" src={default_pfp}></img>
           </div>
           <div className="dashboard_info_container">
             <div className="dashboard_list">
+              <img className="dashboard_pfp" src={default_pfp}></img>
               <div className="dashboard_info_element">{username}</div>
               <div className="dashboard_element">Admin Panel</div>
               <div className="dashboard_element">Settings</div>

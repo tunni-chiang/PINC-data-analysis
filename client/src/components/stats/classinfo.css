@@ -16,6 +16,11 @@
 .class_info:active .class_name {
   color: #cc3a3a;
 }
+
+.course_selected {
+  color: #cc3a3a !important;
+}
+
 .class_name {
   color: white;
   display: flex;

@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { StackedBar } from "./charts/StackedBar";
 import ClassInfo from "./ClassInfo";
 import axios from "axios";
-import { saveAs } from "file-saver";
+// import { saveAs } from "file-saver";
 import "./statspanel.css";
 import { useCookies } from "react-cookie";
 import { useSelector, useDispatch } from "react-redux";
@@ -50,23 +50,26 @@ function StatsPanel({ selected_demographic }: any) {
       }
     } catch (err) {}
   };
+
   useEffect(() => {
     getData();
   });
+
   return (
     <div className="statspanel_container">
       <div className="stats_info">
-        <ClassInfo
-          courses={["CSC220", "CSC219"]}
-          select_cb={setSelectedCourses}
-          class_name="CSC 220 | 219"
-          image_src="asd"
-        />
         <ClassInfo
           courses={["CSC210", "CSC306"]}
           select_cb={setSelectedCourses}
           class_name="CSC 210 | 306"
           image_src="asd"
+        />
+        <ClassInfo
+          courses={["CSC220", "CSC219"]}
+          select_cb={setSelectedCourses}
+          class_name="CSC 220 | 219"
+          image_src="asd"
+          activeDefault={true}
         />
         <ClassInfo
           courses={["CSC307", "CSC308"]}
@@ -75,9 +78,27 @@ function StatsPanel({ selected_demographic }: any) {
           image_src="asd"
         />
         <ClassInfo
-          courses={["CSC699", "CSC698"]}
+          courses={["CSC508", "CSC698", "CSC699"]}
           select_cb={setSelectedCourses}
-          class_name="CSC 698 | 699"
+          class_name="CSC 508 | 698 | 699"
+          image_src="asd"
+        />
+        <ClassInfo
+          courses={["CSC509", "CSC698", "CSC699"]}
+          select_cb={setSelectedCourses}
+          class_name="CSC 509 | 698 | 699"
+          image_src="asd"
+        />
+        <ClassInfo
+          courses={["CSC601"]}
+          select_cb={setSelectedCourses}
+          class_name="CSC 601"
+          image_src="asd"
+        />
+        <ClassInfo
+          courses={["CSC602"]}
+          select_cb={setSelectedCourses}
+          class_name="CSC 602"
           image_src="asd"
         />
         <ClassInfo
