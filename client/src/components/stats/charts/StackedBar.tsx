@@ -12,18 +12,29 @@ import faker from "faker";
 
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setPincData, selectData, selectDataExists } from "../../../store/slices/dataSlice";
+import {
+  setPincData,
+  selectData,
+  selectDataExists,
+} from "../../../store/slices/dataSlice";
 import { demographicAndYear } from "../../../helper/data_analysis";
 import { reverse_search } from "../settings";
 import "./graphs.css";
-ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
 const getData = (dataset: any, demographic: string, courses: string[]) => {
-  console.log("selected");
-  console.log(courses);
+  console.log("StackedBar - dataset: ", dataset);
+  console.log("StackedBar - demographic: ", demographic);
+  console.log("StackedBar - courses: ", courses);
   let data = demographicAndYear(dataset, demographic, courses);
-  console.log("data");
-  console.log(data);
+  console.log("StackedBar - data: ", data);
 
   return data;
 };
@@ -33,7 +44,9 @@ const getOptions = (demographic: string, courses: string[]) => {
     plugins: {
       title: {
         display: true,
-        text: `${reverse_search[demographic]} analysis of ${courses.join(" and ")}`,
+        text: `${reverse_search[demographic]} analysis of ${courses.join(
+          " and "
+        )}`,
       },
     },
     responsive: true,

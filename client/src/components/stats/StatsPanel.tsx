@@ -2,11 +2,15 @@ import { useState, useEffect, useRef } from "react";
 import { StackedBar } from "./charts/StackedBar";
 import ClassInfo from "./ClassInfo";
 import axios from "axios";
-// import { saveAs } from "file-saver";
+import { saveAs } from "file-saver";
 import "./statspanel.css";
 import { useCookies } from "react-cookie";
 import { useSelector, useDispatch } from "react-redux";
-import { setPincData, selectData, selectDataExists } from "../../store/slices/dataSlice";
+import {
+  setPincData,
+  selectData,
+  selectDataExists,
+} from "../../store/slices/dataSlice";
 
 function StatsPanel({ selected_demographic }: any) {
   const currentGraph = useRef(null);
@@ -33,43 +37,42 @@ function StatsPanel({ selected_demographic }: any) {
 
   const getData = async () => {
     try {
-      let response = await axios.get(process.env.REACT_APP_BACKEND_IP + "/stats/read", {
-        headers: {
-          "x-access-token": cookies.user,
-        },
-      });
-      console.log(response);
-      console.log(response);
-      console.log(response);
+      let response = await axios.get(
+        process.env.REACT_APP_BACKEND_IP + "/stats/read",
+        {
+          headers: {
+            "x-access-token": cookies.user,
+          },
+        }
+      );
+      console.log("StatsPanel - Response: ", response);
 
+      // TODO finish the logic
       let status: any = response.data;
       if (status.success) {
+        console.log("StatsPanel - Status.data: ", status.data);
         dispatch(setPincData(status.data));
-        console.log(status.data);
       } else {
       }
     } catch (err) {}
   };
-
   useEffect(() => {
     getData();
   });
-
   return (
     <div className="statspanel_container">
       <div className="stats_info">
-        <ClassInfo
-          courses={["CSC210", "CSC306"]}
-          select_cb={setSelectedCourses}
-          class_name="CSC 210 | 306"
-          image_src="asd"
-        />
         <ClassInfo
           courses={["CSC220", "CSC219"]}
           select_cb={setSelectedCourses}
           class_name="CSC 220 | 219"
           image_src="asd"
-          activeDefault={true}
+        />
+        <ClassInfo
+          courses={["CSC210", "CSC306"]}
+          select_cb={setSelectedCourses}
+          class_name="CSC 210 | 306"
+          image_src="asd"
         />
         <ClassInfo
           courses={["CSC307", "CSC308"]}
@@ -78,31 +81,22 @@ function StatsPanel({ selected_demographic }: any) {
           image_src="asd"
         />
         <ClassInfo
-          courses={["CSC508", "CSC698", "CSC699"]}
+          courses={["CSC699", "CSC698"]}
           select_cb={setSelectedCourses}
-          class_name="CSC 508 | 698 | 699"
+          class_name="CSC 698 | 699"
           image_src="asd"
         />
         <ClassInfo
-          courses={["CSC509", "CSC698", "CSC699"]}
-          select_cb={setSelectedCourses}
-          class_name="CSC 509 | 698 | 699"
-          image_src="asd"
-        />
-        <ClassInfo
-          courses={["CSC601"]}
-          select_cb={setSelectedCourses}
-          class_name="CSC 601"
-          image_src="asd"
-        />
-        <ClassInfo
-          courses={["CSC602"]}
-          select_cb={setSelectedCourses}
-          class_name="CSC 602"
-          image_src="asd"
-        />
-        <ClassInfo
-          courses={["CSC220", "CSC219", "CSC210", "CSC306", "CSC307", "CSC308", "CSC699", "CSC698"]}
+          courses={[
+            "CSC220",
+            "CSC219",
+            "CSC210",
+            "CSC306",
+            "CSC307",
+            "CSC308",
+            "CSC699",
+            "CSC698",
+          ]}
           select_cb={setSelectedCourses}
           class_name="Pinc Courses | All"
           image_src="asd"
