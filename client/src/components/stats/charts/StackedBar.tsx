@@ -30,11 +30,11 @@ ChartJS.register(
 );
 
 const getData = (dataset: any, demographic: string, courses: string[]) => {
-  console.log("StackedBar - dataset: ", dataset);
-  console.log("StackedBar - demographic: ", demographic);
-  console.log("StackedBar - courses: ", courses);
+  // console.log("StackedBar - dataset: ", dataset);
+  // console.log("StackedBar - demographic: ", demographic);
+  // console.log("StackedBar - courses: ", courses);
   let data = demographicAndYear(dataset, demographic, courses);
-  console.log("StackedBar - data: ", data);
+  // console.log("StackedBar - data: ", data);
 
   return data;
 };

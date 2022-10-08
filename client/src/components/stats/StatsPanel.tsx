@@ -45,12 +45,12 @@ function StatsPanel({ selected_demographic }: any) {
           },
         }
       );
-      console.log("StatsPanel - Response: ", response);
+      // console.log("StatsPanel - Response: ", response);
 
       // TODO finish the logic
       let status: any = response.data;
       if (status.success) {
-        console.log("StatsPanel - Status.data: ", status.data);
+        // console.log("StatsPanel - Status.data: ", status.data);
         dispatch(setPincData(status.data));
       } else {
       }

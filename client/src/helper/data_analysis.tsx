@@ -1,6 +1,6 @@
 export function sortBySemester(semesters: string[]) {
   let seasons: any = { Winter: 1, Spring: 2, Summer: 3, Fall: 4 };
-  console.log("data_analysis -> sortBySemester - semesters: ", semesters);
+  // console.log("data_analysis -> sortBySemester - semesters: ", semesters);
   return semesters.sort((a, b) => {
     if (a != null && b != null) {
       let aa: any = a.split(" ");
@@ -18,7 +18,7 @@ export function demographicAndYear(
 ) {
   // verifiying arguments
   console.log("data_analysis -> demographicAndYear - dataset: ", dataset);
-  console.log("data_analysis -> demographicAndYear - demo_query: ", demo_query);
+  // console.log("data_analysis -> demographicAndYear - demo_query: ", demo_query);
   console.log("data_analysis -> demographicAndYear - courses: ", courses);
 
   // colors
@@ -34,17 +34,82 @@ export function demographicAndYear(
   let temp: any = [];
 
   // filter data for needed courses
-  for (let course of courses) {
-    let temp_course_info = dataset.filter(
-      (d: any) => d.course_name.replace(/\s/g, "") === course
-    );
-    console.log(
-      "data_analysis -> demographicAndYear - temp_course_info: ",
-      temp_course_info
-    );
-    temp = [...temp, ...temp_course_info];
-    console.log("data_analysis -> demographicAndYear - temp: ", temp);
+
+  // Actual Program
+
+  for (let i = 1; i < courses.length; i += 2) {
+    if (temp.length == 0) {
+      // console.log("init....");
+      temp = dataset.filter(
+        (d: any) =>
+          d.course_name.replace(/\s/g, "") === courses[i - 1] ||
+          d.course_name.replace(/\s/g, "") === courses[i]
+      );
+      // console.log("max size: ", temp.length);
+    } else {
+      // console.log("after init....");
+      let temp_course_info = dataset.filter(
+        (d: any) =>
+          d.course_name.replace(/\s/g, "") === courses[i - 1] ||
+          d.course_name.replace(/\s/g, "") === courses[i]
+      );
+
+      // console.log("before temp_course_info: ", temp_course_info);
+      temp_course_info = temp_course_info.filter((o1: any) =>
+        temp.some((o2: any) => o1.anon_id === o2.anon_id)
+      );
+      // console.log("after temp_course_info: ", temp_course_info);
+
+      // console.log("before temp: ", temp);
+      temp = temp.filter((o1: any) =>
+        temp_course_info.some((o2: any) => o1.anon_id === o2.anon_id)
+      );
+      // console.log("after temp: ", temp);
+
+      temp = temp.concat(temp_course_info);
+    }
   }
+
+  console.log("final temp: ", temp);
+
+  // 1. get the anon_id_filter
+  // let anon_id_filter: any = [];
+  // for (let i = 1; i < courses.length; i += 2) {
+  //   let temp_course_info = dataset.filter(
+  //     (d: any) =>
+  //       d.course_name.replace(/\s/g, "") === courses[i - 1] ||
+  //       d.course_name.replace(/\s/g, "") === courses[i]
+  //   );
+  //   if (temp_course_info.length != 0) {
+  //     for (let course_info of temp_course_info) {
+  //       if (anon_id_filter.length == 0) {
+  //         anon_id_filter.push(course_info.anon_id);
+  //       } else {
+  //         if (!anon_id_filter.includes(course_info.anon_id)) {
+  //           anon_id_filter.splice(
+  //             anon_id_filter.indexOf(course_info.anon_id),
+  //             1
+  //           );
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
+
+  // 2. apply filter of course on dataset
+  // for (let course of courses) {
+  //   let temp_course_info = dataset.filter(
+  //     (d: any) => d.course_name.replace(/\s/g, "") === course
+  //   );
+  //   temp = [...temp, ...temp_course_info];
+  // }
+
+  // 3. apply filter of anon_id on temp
+  // for (let temp_data of temp) {
+  //   if (!anon_id_filter.includes(temp_data.anon_id)) {
+  //     temp.splice(temp.indexOf(temp_data), 1);
+  //   }
+  // }
 
   // get sets to only use the data that we need
   let semester_labels: string[] = Array.from(
@@ -77,12 +142,6 @@ export function demographicAndYear(
 
     datasets.push(result);
   }
-
-  console.log("data_analysis -> demographicAndYear - datasets: ", datasets);
-  console.log(
-    "data_analysis -> demographicAndYear - semester_labels: ",
-    semester_labels
-  );
 
   return { datasets: datasets, labels: semester_labels };
 }
