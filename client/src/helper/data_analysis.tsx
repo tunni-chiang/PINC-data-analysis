@@ -1,11 +1,31 @@
+// export function sortBySemester(semesters: string[]) {
+//   let seasons: any = { Winter: 1, Spring: 2, Summer: 3, Fall: 4 };
+//   // console.log("data_analysis -> sortBySemester - semesters: ", semesters);
+//   return semesters.sort((a, b) => {
+//     if (a != null && b != null) {
+//       let aa: any = a.split(" ");
+//       let bb: any = b.split(" ");
+//       return aa[1] - bb[1] || seasons[aa[0]] - seasons[bb[0]];
+//     }
+//     return 0;
+//   });
+// }
+
 export function sortBySemester(semesters: string[]) {
   let seasons: any = { Winter: 1, Spring: 2, Summer: 3, Fall: 4 };
-  // console.log("data_analysis -> sortBySemester - semesters: ", semesters);
   return semesters.sort((a, b) => {
     if (a != null && b != null) {
-      let aa: any = a.split(" ");
-      let bb: any = b.split(" ");
-      return aa[1] - bb[1] || seasons[aa[0]] - seasons[bb[0]];
+      let charsA: any = a.slice(0, a.search(/\d/));
+      let numbsA: any = a.replace(charsA, "");
+      let charsB: any = b.slice(0, b.search(/\d/));
+      let numbsB: any = b.replace(charsB, "");
+
+      if (numbsA < numbsB) return -1;
+      else if (numbsA > numbsB) return 1;
+      else {
+        if (seasons[charsA] < seasons[charsB]) return -1;
+        else if (seasons[charsA] > seasons[charsB]) return 1;
+      }
     }
     return 0;
   });
@@ -31,11 +51,8 @@ export function demographicAndYear(
     "#4B8696",
     "#768FA0",
   ];
+
   let temp: any = [];
-
-  // filter data for needed courses
-
-  // Actual Program
 
   for (let i = 1; i < courses.length; i += 2) {
     if (temp.length == 0) {
@@ -45,7 +62,6 @@ export function demographicAndYear(
           d.course_name.replace(/\s/g, "") === courses[i - 1] ||
           d.course_name.replace(/\s/g, "") === courses[i]
       );
-      // console.log("max size: ", temp.length);
     } else {
       // console.log("after init....");
       let temp_course_info = dataset.filter(
@@ -70,46 +86,17 @@ export function demographicAndYear(
     }
   }
 
+  if (courses[0] == "CSC699" || courses[1] == "CSC699") {
+    let temp_course_info = dataset.filter(
+      (d: any) =>
+        d.course_name.replace(/\s/g, "") === "CSC508" ||
+        d.course_name.replace(/\s/g, "") === "CSC509"
+    );
+
+    temp = [...temp, ...temp_course_info];
+  }
+
   console.log("final temp: ", temp);
-
-  // 1. get the anon_id_filter
-  // let anon_id_filter: any = [];
-  // for (let i = 1; i < courses.length; i += 2) {
-  //   let temp_course_info = dataset.filter(
-  //     (d: any) =>
-  //       d.course_name.replace(/\s/g, "") === courses[i - 1] ||
-  //       d.course_name.replace(/\s/g, "") === courses[i]
-  //   );
-  //   if (temp_course_info.length != 0) {
-  //     for (let course_info of temp_course_info) {
-  //       if (anon_id_filter.length == 0) {
-  //         anon_id_filter.push(course_info.anon_id);
-  //       } else {
-  //         if (!anon_id_filter.includes(course_info.anon_id)) {
-  //           anon_id_filter.splice(
-  //             anon_id_filter.indexOf(course_info.anon_id),
-  //             1
-  //           );
-  //         }
-  //       }
-  //     }
-  //   }
-  // }
-
-  // 2. apply filter of course on dataset
-  // for (let course of courses) {
-  //   let temp_course_info = dataset.filter(
-  //     (d: any) => d.course_name.replace(/\s/g, "") === course
-  //   );
-  //   temp = [...temp, ...temp_course_info];
-  // }
-
-  // 3. apply filter of anon_id on temp
-  // for (let temp_data of temp) {
-  //   if (!anon_id_filter.includes(temp_data.anon_id)) {
-  //     temp.splice(temp.indexOf(temp_data), 1);
-  //   }
-  // }
 
   // get sets to only use the data that we need
   let semester_labels: string[] = Array.from(
@@ -120,8 +107,9 @@ export function demographicAndYear(
   );
 
   // sort semester labels
+  console.log("semester_labels (after sorting): ", semester_labels);
   semester_labels = sortBySemester(semester_labels);
-
+  console.log("semester_labels (before sorting): ", semester_labels);
   // consists of array of objects which hold data for each demographic
   let datasets: any = [];
 
