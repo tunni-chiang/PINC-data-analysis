@@ -83,7 +83,7 @@ function StatsPanel({ selected_demographic }: any) {
         <ClassInfo
           courses={["CSC699", "CSC698"]}
           select_cb={setSelectedCourses}
-          class_name="CSC 698 | 699"
+          class_name="CSC 698 | 699 | 508 | 509"
           image_src="asd"
         />
         <ClassInfo
