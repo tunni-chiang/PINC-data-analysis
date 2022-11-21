@@ -17,7 +17,7 @@ import {
   selectData,
   selectDataExists,
 } from "../../../store/slices/dataSlice";
-import { demographicAndYear } from "../../../helper/data_analysis";
+import { demographicAndYear, getTotal } from "../../../helper/data_analysis";
 import { reverse_search } from "../settings";
 import "./graphs.css";
 ChartJS.register(
@@ -30,12 +30,11 @@ ChartJS.register(
 );
 
 const getData = (dataset: any, demographic: string, courses: string[]) => {
-  // console.log("StackedBar - dataset: ", dataset);
-  // console.log("StackedBar - demographic: ", demographic);
+  console.log("StackedBar - dataset: ", dataset);
+  console.log("StackedBar - demographic: ", demographic);
   // console.log("StackedBar - courses: ", courses);
   let data = demographicAndYear(dataset, demographic, courses);
-  // console.log("StackedBar - data: ", data);
-
+  console.log("StackedBar - data: ", data);
   return data;
 };
 
@@ -62,9 +61,18 @@ const getOptions = (demographic: string, courses: string[]) => {
   return options;
 };
 
+export function TotalNumber({ demographic, courses }: any) {
+  const dataset = useSelector(selectData);
+  let total = dataset && getTotal(dataset, courses);
+  return (
+    <div className="stats_tool_box stats_total_box">
+      <p className="stats_download_desc">Total Number of Student: {total}</p>
+    </div>
+  );
+}
+
 export function StackedBar({ ref_cb, courses, demographic }: any) {
   const dataset = useSelector(selectData);
-
   return (
     <div style={{ height: "200px", width: "70%" }}>
       {dataset && (

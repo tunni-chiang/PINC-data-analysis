@@ -31,6 +31,55 @@ export function sortBySemester(semesters: string[]) {
   });
 }
 
+export function getTotal(dataset: any, courses: string[]) {
+  let temp: any = [];
+
+  for (let i = 1; i < courses.length; i += 2) {
+    if (temp.length == 0) {
+      // console.log("init....");
+      temp = dataset.filter(
+        (d: any) =>
+          d.course_name.replace(/\s/g, "") === courses[i - 1] ||
+          d.course_name.replace(/\s/g, "") === courses[i]
+      );
+    } else {
+      // console.log("after init....");
+      let temp_course_info = dataset.filter(
+        (d: any) =>
+          d.course_name.replace(/\s/g, "") === courses[i - 1] ||
+          d.course_name.replace(/\s/g, "") === courses[i]
+      );
+
+      // console.log("before temp_course_info: ", temp_course_info);
+      temp_course_info = temp_course_info.filter((o1: any) =>
+        temp.some((o2: any) => o1.anon_id === o2.anon_id)
+      );
+      // console.log("after temp_course_info: ", temp_course_info);
+
+      // console.log("before temp: ", temp);
+      temp = temp.filter((o1: any) =>
+        temp_course_info.some((o2: any) => o1.anon_id === o2.anon_id)
+      );
+      // console.log("after temp: ", temp);
+
+      temp = temp.concat(temp_course_info);
+    }
+  }
+
+  if (courses[0] == "CSC699" || courses[1] == "CSC699") {
+    let temp_course_info = dataset.filter(
+      (d: any) =>
+        d.course_name.replace(/\s/g, "") === "CSC508" ||
+        d.course_name.replace(/\s/g, "") === "CSC509"
+    );
+
+    temp = [...temp, ...temp_course_info];
+  }
+
+  console.log("final temp: ", temp);
+  return temp.length;
+}
+
 export function demographicAndYear(
   dataset: any,
   demo_query: string,
@@ -131,5 +180,5 @@ export function demographicAndYear(
     datasets.push(result);
   }
 
-  return { datasets: datasets, labels: semester_labels };
+  return { datasets: datasets, labels: semester_labels, total: temp.length };
 }

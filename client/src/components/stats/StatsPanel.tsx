@@ -1,11 +1,12 @@
 import { useState, useEffect, useRef } from "react";
-import { StackedBar } from "./charts/StackedBar";
+import { StackedBar, TotalNumber } from "./charts/StackedBar";
 import ClassInfo from "./ClassInfo";
 import axios from "axios";
 import { saveAs } from "file-saver";
 import "./statspanel.css";
 import { useCookies } from "react-cookie";
 import { useSelector, useDispatch } from "react-redux";
+import { demographicAndYear } from "../../helper/data_analysis";
 import {
   setPincData,
   selectData,
@@ -50,7 +51,7 @@ function StatsPanel({ selected_demographic }: any) {
       // TODO finish the logic
       let status: any = response.data;
       if (status.success) {
-        // console.log("StatsPanel - Status.data: ", status.data);
+        console.log("StatsPanel - Status.data: ", status.data);
         dispatch(setPincData(status.data));
       } else {
       }
@@ -104,14 +105,22 @@ function StatsPanel({ selected_demographic }: any) {
       </div>
 
       <div className="stats_data_vis">
-        <div className="stats_download_zone">
-          <p className="stats_download_desc">
-            Download data visualization for {selectedCourses.join("/")}
-          </p>
-          <button className="download_button" onClick={() => saveCanvas()}>
-            Download
-          </button>
+        <div className="stats_tool_zone">
+          <div className="stats_tool_box">
+            <p className="stats_download_desc">
+              Download data visualization for {selectedCourses.join("/")}
+            </p>
+            <button className="download_button" onClick={() => saveCanvas()}>
+              Download
+            </button>
+          </div>
+
+          <TotalNumber
+            courses={selectedCourses}
+            demographic={selected_demographic}
+          />
         </div>
+
         <div className="stats_display">
           <StackedBar
             ref_cb={currentGraph}
