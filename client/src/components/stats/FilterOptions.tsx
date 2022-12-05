@@ -7,11 +7,15 @@ function FilterOptions({ select_demographic_cb }: any) {
   return (
     <div className="filter_options">
       <p>Demographic Factor</p>
-      <select className="filter_select">
+      <select
+        className="filter_select"
+        onChange={(e: any) => {
+          console.log("e.target.value: ", e.target.value);
+          select_demographic_cb(e.target.value);
+        }}
+      >
         {Object.entries(demographic_options).map(([key, value]) => (
-          <option value={value} onClick={(e: any) => select_demographic_cb(e.target.value)}>
-            {key}
-          </option>
+          <option value={value}>{key}</option>
         ))}
       </select>
       <p>Visual Representation</p>
